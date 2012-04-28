@@ -10,8 +10,8 @@ class GameForm(forms.Form):
 
 	def clean_player(self, player):
 		try:
-			return User.objects.get(account__handle=player)
-		except User.DoesNotExist:
+			return Account.objects.get(handle=player)
+		except Account.DoesNotExist:
 			return False
 
 	def clean_player_1(self):
@@ -38,7 +38,7 @@ class GameForm(forms.Form):
 
 	def process(self):
 		account_1 = Account.objects.get(handle=self.cleaned_data['player_1'])
-		account_2 = User.objects.get(handle=self.cleaned_data['player_2'])
+		account_2 = Account.objects.get(handle=self.cleaned_data['player_2'])
 		score_1 = self.cleaned_data['score_1']
 		score_2 = self.cleaned_data['score_2']
 
