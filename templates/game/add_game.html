@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if message %}
+    <div class="alert {{alert_class}}"> {{message}} </div>
+    {% endif %}
+    <div>
+      <form action="." method="POST"> {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Add Game" class="btn btn-primary btn-large"/>
+      </form>
+    </div>
+{% endblock %}
