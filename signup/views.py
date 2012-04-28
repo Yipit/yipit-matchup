@@ -29,22 +29,3 @@ class LandingView(View):
             return HttpResponseRedirect(reverse('dashboard'))
         else:
             return HttpResponseRedirect(reverse('login'))
-
-class DashboardView(TemplateView):
-    template_name = 'account/dashboard.html'
-    
-    def get(self, request, *args, **kwargs):
-        self.games = Game.objects.all()
-        return self.render_to_response(self.compute_context(request, *args, **kwargs))
-
-    def compute_context(self, request, *args, **kwargs):
-        context = {}
-        context['games'] = self.games
-        return context
-
-
-
-
-
-
-

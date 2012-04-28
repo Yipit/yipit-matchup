@@ -2,8 +2,8 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 import settings
 from django.conf.urls.static import static
-from game.views import AddGameView
-from signup.views import LandingView, DashboardView
+from game.views import AddGameView, DashboardView
+from signup.views import LandingView
 
 admin.autodiscover()
 

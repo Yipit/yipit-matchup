@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
-from django.core.urlresolvers import reverse
+
 from django.views.generic.base import TemplateView
+
 from game.forms import GameForm
+from game.models import Game
+
 
 class AddGameView(TemplateView):
 	template_name = 'game/add_game.html'
@@ -34,3 +39,16 @@ class AddGameView(TemplateView):
 		context['message'] = self.message
 		context['alert_class'] = self.alert_class
 		return context
+
+
+class DashboardView(TemplateView):
+    template_name = 'account/dashboard.html'
+
+    def get(self, request, *args, **kwargs):
+        self.games = Game.objects.all()
+        return self.render_to_response(self.compute_context(request, *args, **kwargs))
+
+    def compute_context(self, request, *args, **kwargs):
+        context = {}
+        context['games'] = self.games
+        return context

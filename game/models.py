@@ -1,11 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Game(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
-	player_1 = models.ForeignKey('auth.User', related_name='player_1')
-	player_2 = models.ForeignKey('auth.User', related_name='player_2')
-	score_1 = models.PositiveIntegerField()
-	score_2 = models.PositiveIntegerField()
+	winner = models.ForeignKey('auth.User', related_name='winner')
+	loser = models.ForeignKey('auth.User', related_name='loser')
+	winning_score = models.PositiveIntegerField()
+	losing_score = models.PositiveIntegerField()
 
 	def __unicode__(self):
-		return u"%s vs %s (%s to %s)" % (self.player_1, self.player_2, self.score_1, self.score_2)
+		return u"{} vs {} ({} to {})".format(self.loser, self.winner, self.losing_score, self.winning_score)
+
+
+class Account(models.Model):
+	handle = models.CharField(max_length=20)
+	user = models.OneToOneField('auth.User')
+
+	def __unicode__(self):
+		return self.handle
