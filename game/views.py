@@ -12,33 +12,33 @@ from game.models import Game, Account
 
 
 class AddGameView(TemplateView):
-	template_name = 'game/add_game.html'
-	form_class = GameForm
-	message = ""
-	alert_class = ""
+    template_name = 'game/add_game.html'
+    form_class = GameForm
+    message = ""
+    alert_class = ""
 
-	def get(self, request, *args, **kwargs):
-		self.form = self.form_class()
-		return self.render_to_response(self.compute_context(request, *args, **kwargs))
+    def get(self, request, *args, **kwargs):
+        self.form = self.form_class()
+        return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
-	def post(self, request, *args, **kwargs):
-		self.form = self.form_class(request.POST)
-		if self.form.is_valid():
-			self.form.process()
-			self.form = self.form_class()
-			self.message = "Game record added!"
-			self.alert_class = "alert-success"
-		else:
-			self.message = "Oops! There were some issues processing your submission!"
-			self.alert_class = "alert-error"
-		return self.render_to_response(self.compute_context(request, *args, **kwargs))
+    def post(self, request, *args, **kwargs):
+        self.form = self.form_class(request.POST)
+        if self.form.is_valid():
+            self.form.process()
+            self.form = self.form_class()
+            self.message = "Game record added!"
+            self.alert_class = "alert-success"
+        else:
+            self.message = "Oops! There were some issues processing your submission!"
+            self.alert_class = "alert-error"
+        return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
-	def compute_context(self, request, *args, **kwargs):
-		context = {}
-		context['form'] = self.form
-		context['message'] = self.message
-		context['alert_class'] = self.alert_class
-		return context
+    def compute_context(self, request, *args, **kwargs):
+        context = {}
+        context['form'] = self.form
+        context['message'] = self.message
+        context['alert_class'] = self.alert_class
+        return context
 
 
 class DashboardView(TemplateView):
@@ -46,13 +46,25 @@ class DashboardView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         self.games = Game.objects.all()
-        wins_list = [(account, account.win_count) for account in Account.objects.all()]
-        winner_list = sorted(wins_list, key=lambda x: wins_list[1])
+        
+        all_accounts = Account.objects.all()
+
+        wins_list = [(account, account.win_count) for account in all_accounts]
+        winner_list = sorted(wins_list, key=lambda x: x[1], reverse=True)
         self.winner_list = list(map(lambda x: x[0], winner_list))
+
+        rank_list = [(account, account.rank) for account in all_accounts]
+        sorted_rank_list = sorted(rank_list, key=lambda x: x[1])
+        self.ranked_players = list(map(lambda x: x[0], sorted_rank_list))
+
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
     def compute_context(self, request, *args, **kwargs):
         context = {}
         context['winner_list'] = self.winner_list
         context['games'] = self.games
+        context['ranked_players'] = self.ranked_players
         return context
+
+
+

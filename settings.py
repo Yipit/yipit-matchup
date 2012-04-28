@@ -119,7 +119,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
      'django.contrib.admindocs',
      'matchup.game',
-     'matchup.signup'
+     'matchup.signup',
+     'matchup.rank',
 )
 
 # A sample logging configuration. The only tangible logging

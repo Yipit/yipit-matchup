@@ -6,7 +6,7 @@
         <div class="well"><h2> Games Played </h2></div>
         <ul>
         {% for game in games %}
-          <li>{{ game.loser.account.handle }} vs {{ game.winner.account.handle }}: {{ game.losing_score }} - {{ game.winning_score }} </li>
+          <li>{{ game.loser.handle }} vs {{ game.winner.handle }}: {{ game.losing_score }} - {{ game.winning_score }} </li>
         {% endfor %}
         </ul>
       </div>
@@ -20,6 +20,11 @@
       </div>
       <div class="span4">
         <div class="well"><h2> Ranking </h2></div>
+        <ul style="list-display-style: None">
+        {% for player in ranked_players %}
+          <li>{{ player.rank }}. {{ player.handle }}: {{ player.score }}</li>
+        {% endfor %}
+        </ul>
       </div>
     </div>
 {% endblock %}
