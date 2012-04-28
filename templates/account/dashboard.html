@@ -12,6 +12,11 @@
       </div>
       <div class="span4">
         <div class="well"><h2> Most Wins </h2></div>
+        <ul>
+        {% for winner in winner_list %}
+          <li>{{ winner.handle }}: {{ winner.win_count }} wins</li>
+        {% endfor %}
+      </ul>
       </div>
       <div class="span4">
         <div class="well"><h2> Ranking </h2></div>

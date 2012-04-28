@@ -18,3 +18,16 @@ class Account(models.Model):
 
 	def __unicode__(self):
 		return self.handle
+
+	@property
+	def win_count(self):
+		return Game.objects.filter(winner=self.user).count()
+
+	@property
+	def loss_count(self):
+		return Game.objects.filter(loser=self.user).count()
+
+	@property
+	def games_played(self):
+		return self.win_count + self.loss_count 
+

@@ -8,7 +8,7 @@ from django.contrib.auth import logout as auth_logout
 from django.views.generic.base import TemplateView
 
 from game.forms import GameForm
-from game.models import Game
+from game.models import Game, Account
 
 
 class AddGameView(TemplateView):
@@ -46,9 +46,13 @@ class DashboardView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         self.games = Game.objects.all()
+        wins_list = [(account, account.win_count) for account in Account.objects.all()]
+        winner_list = sorted(wins_list, key=lambda x: wins_list[1])
+        self.winner_list = list(map(lambda x: x[0], winner_list))
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
     def compute_context(self, request, *args, **kwargs):
         context = {}
+        context['winner_list'] = self.winner_list
         context['games'] = self.games
         return context
