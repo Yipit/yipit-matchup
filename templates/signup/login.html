@@ -1,80 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Yipit Matchup</title>
+{% extends 'base.html' %}
 
-    <!-- Le styles -->
-    <link href="/media/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-  </head>
-
-  <body>
-
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="{% url login %}"><img style="height:20px"src="/media/img/ping-pong-icon.png"/>Yipit Matchup</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-           
-            </ul>
-          </div><!--/.nav-collapse -->
-          <div>
-                    <form class="navbar-form pull-right" method="POST" action="."> {% csrf_token %}
-        <input type='text' name='username' placeholder='username'/> 
-        <input type='password' name='password' placeholder='password'/>
-        <input class='btn btn-success' type='submit' value='Login'/ >
+{% block nav_bar_content %}
+<div>
+    <form class="navbar-form pull-right" method="POST" action="."> {% csrf_token %}
+      <input type='text' name='username' placeholder='username'/> 
+      <input type='password' name='password' placeholder='password'/>
+      <input class='btn btn-success' type='submit' value='Login'/ >
     </form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="hero-unit">
+  <h1 style="margin-bottom:15px">Yipit Matchup!</h1>
+  <p>A nice way to keep track of the ping pong matches of Team Yipit and current rankings.</p>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <h2>Add your games</h2>
+     <p>Add the records of games you've played - only one record per game. </p>
   </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1 style="margin-bottom:15px">Yipit Matchup!</h1>
-        <p>A nice way to keep track of the ping pong matches of Team Yipit and current rankings.</p>
-      </div>
-
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-          <h2>Add your games</h2>
-           <p>Add the records of games you've played - only one record per game. </p>
-        </div>
-        <div class="span4">
-          <h2>See updated rankings</h2>
-           <p>Yipit Matchup's ranking engine will compute internal rankings of Team Yipit after each new game.</p>
-       </div>
-        <div class="span4">
-          <h2>Track your progress</h2>
-          <p>Yipit Matchup's data visualization will allow you to see the progress you've made.</p>
-        </div>
-      </div>
-
-      <hr>
-
-      <footer>
-        <p>&copy; Yipit Matchup 2012</p>
-      </footer>
-
-    </div> <!-- /container -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-
-  </body>
-</html>
+  <div class="span4">
+    <h2>See updated rankings</h2>
+     <p>Yipit Matchup's ranking engine will compute internal rankings of Team Yipit after each new game.</p>
+ </div>
+  <div class="span4">
+    <h2>Track your progress</h2>
+    <p>Yipit Matchup's data visualization will allow you to see the progress you've made.</p>
+  </div>
+</div>
+{% endblock %}

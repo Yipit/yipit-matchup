@@ -28,18 +28,7 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="{% url dashboard %}"><img style="height:20px"src="/media/img/ping-pong-icon.png"/>Yipit Matchup</a>
-          <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> {{ user.account.handle }}
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
-              <li class="divider"></li>
-              <li><a href="{% url logout %}">Sign Out</a></li>
-            </ul>
-          </div>
-          <a href="{% url add_game %}" class="pull-right btn btn-large btn-success">Add Game</a>
+          {% block nav_bar_content %} {% endblock %}
         </div>
       </div>
     </div>
