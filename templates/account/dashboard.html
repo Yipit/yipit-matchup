@@ -20,9 +20,9 @@
       </div>
       <div class="span4">
         <div class="well"><h2> Ranking </h2></div>
-        <ul style="list-display-style: None">
+        <ul>
         {% for player in ranked_players %}
-          <li>{{ player.rank }}. {{ player.handle }}: {{ player.score }}</li>
+          <li>{{ player.rank }}. {{ player.handle }}: {{ player.rating }}</li>
         {% endfor %}
         </ul>
       </div>

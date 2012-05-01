@@ -48,7 +48,6 @@ class DashboardView(TemplateView):
         self.games = Game.objects.all()
         
         all_accounts = Account.objects.all()
-
         wins_list = [(account, account.win_count) for account in all_accounts]
         winner_list = sorted(wins_list, key=lambda x: x[1], reverse=True)
         self.winner_list = list(map(lambda x: x[0], winner_list))
