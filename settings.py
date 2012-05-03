@@ -13,14 +13,13 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': 'sdcfivlasv',                      # Or path to database file if using sqlite3.
+        'USER': 'sdcfivlasv',                      # Not used with sqlite3.
+        'PASSWORD': '_BX602mHv9xxDdyxx6dL',                  # Not used with sqlite3.
+        'HOST': 'ec2-23-23-203-225.compute-1.amazonaws.com',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
-
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
