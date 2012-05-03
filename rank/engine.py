@@ -19,12 +19,13 @@ SPREAD_TO_POINTS_EXCHANGED = {
 
 class RankEngine(object):
 
-    def __init__(self, game):
+    def __init__(self, game=None):
         self.game = game
-        self.winner = self.game.winner
-        self.loser = self.game.loser
-        self.winning_score = self.game.winning_score
-        self.losing_score = self.game.losing_score
+        if self.game:
+            self.winner = self.game.winner
+            self.loser = self.game.loser
+            self.winning_score = self.game.winning_score
+            self.losing_score = self.game.losing_score
 
 
     def _compute_spread(self):
