@@ -90,13 +90,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'matchup.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/suneel0101/Documents/matchup/templates',
+    'templates',
 )
 
 INSTALLED_APPS = (
@@ -110,9 +110,9 @@ INSTALLED_APPS = (
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
      'django.contrib.admindocs',
-     'matchup.game',
-     'matchup.signup',
-     'matchup.rank',
+     'game',
+     'signup',
+     'rank',
      'gunicorn'
 )
 
