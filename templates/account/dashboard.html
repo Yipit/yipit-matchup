@@ -7,6 +7,8 @@
         <ul>
         {% for game in games %}
           <li><b>{{ game.winner.handle }}</b> vs <b>{{ game.loser.handle }}</b>: {{ game.winning_score }} - {{ game.losing_score }} </li>
+        {% empty %}
+        <li>No games have been played yet. Go play a game!</li>
         {% endfor %}
         </ul>
       </div>
@@ -25,6 +27,8 @@
         {% if player.rank %}
           <li>{{ player.rank }}. {{ player.handle }}: {{ player.rating }} ({{player.games_played}} games)</li>
         {% endif %}
+        {% empty %}
+        <li>No players ranked yet</li>
         {% endfor %}
         </ul>
       </div>

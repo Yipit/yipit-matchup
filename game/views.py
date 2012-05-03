@@ -60,7 +60,6 @@ class DashboardView(TemplateView):
         context = {}
         context['games'] = self.games
         context['ranked_players'] = self.ranked_players
-        context['accounts'] = Account.objects.all().exclude(user=request.user)
 
         return context
 
