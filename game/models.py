@@ -7,8 +7,8 @@ class Game(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     winner = models.ForeignKey('game.Account', related_name='winner')
     loser = models.ForeignKey('game.Account', related_name='loser')
-    winning_score = models.DecimalField(max_digits=4, decimal_places=2)
-    losing_score = models.DecimalField(max_digits=4, decimal_places=2)
+    winning_score = models.PositiveIntegerField()
+    losing_score = models.PositiveIntegerField()
     ranked = models.BooleanField(default=False)
 
     def __unicode__(self):

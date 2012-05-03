@@ -2,27 +2,29 @@
 
 {% block content %}
     <div class="row-fluid">
-      <div class="span4">
+      <div class="span6">
         <div class="well"><h2> Games Played </h2></div>
         <ul>
         {% for game in games %}
-          <li>{{ game.loser.handle }} vs {{ game.winner.handle }}: {{ game.losing_score }} - {{ game.winning_score }} </li>
+          <li><b>{{ game.winner.handle }}</b> vs <b>{{ game.loser.handle }}</b>: {{ game.winning_score }} - {{ game.losing_score }} </li>
         {% endfor %}
         </ul>
       </div>
-      <div class="span4">
+<!--      <div class="span4">
         <div class="well"><h2> Most Wins </h2></div>
         <ul>
         {% for winner in winner_list %}
           <li>{{ winner.handle }}: {{ winner.win_count }} wins</li>
-        {% endfor %}
+        {% endfor %} 
       </ul>
-      </div>
-      <div class="span4">
+      </div> -->
+      <div class="span6">
         <div class="well"><h2> Ranking </h2></div>
         <ul>
         {% for player in ranked_players %}
-          <li>{{ player.rank }}. {{ player.handle }}: {{ player.rating }}</li>
+        {% if player.rank %}
+          <li>{{ player.rank }}. {{ player.handle }}: {{ player.rating }} ({{player.games_played}} games)</li>
+        {% endif %}
         {% endfor %}
         </ul>
       </div>
