@@ -5,12 +5,17 @@
       <div class="span6">
         <div class="well"><h2> Games Played </h2></div>
         <ul>
-        {% for game in games %}
-          <li><b>{{ game.winner.handle }}</b> vs <b>{{ game.loser.handle }}</b>: {{ game.winning_score }} - {{ game.losing_score }} </li>
-        {% empty %}
-        <li>No games have been played yet. Go play a game!</li>
-        {% endfor %}
-        </ul>
+
+{% regroup games by date.date|date:"D M d" as games_by_day %}
+<ul>
+
+{% for day in games_by_day %}
+<h4 style="margin-bottom:15px; margin-top:15px"> {{day.grouper}} </h4>
+{% for game in day.list %}
+<li>{{ game.pretty_time }}: <b>{{ game.winner.handle }}</b> v. <b>{{ game.loser.handle }}</b>: {{ game.winning_score }} - {{ game.losing_score }} </li>
+{% endfor %}
+{% endfor %}
+</ul>
       </div>
 <!--      <div class="span4">
         <div class="well"><h2> Most Wins </h2></div>

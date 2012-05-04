@@ -14,6 +14,14 @@ class Game(models.Model):
     def __unicode__(self):
         return u"{} vs {} ({} to {})".format(self.loser, self.winner, self.losing_score, self.winning_score)
 
+    @property
+    def pretty_time(self):
+        return self.date.strftime("%I:%M%p")
+
+    @property
+    def pretty_date(self):
+        return self.date.strftime("%A, %B %d %I:%M%p")
+
     def save(self):
         from rank.engine import RankEngine
 
