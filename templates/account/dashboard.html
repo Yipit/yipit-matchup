@@ -27,10 +27,10 @@
       </div> -->
       <div class="span6">
         <div class="well"><h2> Ranking </h2></div>
-        <ol>
+        <ul>
         {% for player in ranked_players %}
         {% if player.games_played != 0 %}
-          <li>{{ player.handle }}: {{ player.rating }} ({{player.games_played}} games)</li>
+          <li>{{player.rank}}. {{ player.handle }}: {{ player.rating }} ({{player.games_played}} games)</li>
         {% endif %}
         {% empty %}
         <li>No players ranked yet</li>

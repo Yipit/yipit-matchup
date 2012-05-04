@@ -85,13 +85,19 @@ class RankEngine(object):
         ordered_account_list = list(map(lambda x: x[0], account_list_sorted_by_rating))
 
         counter = 1
+        rating_to_beat = 0
         for account in ordered_account_list:
-            account.rank = counter
-            account.save()
-
+            if account.games_played == 0:
+                continue
+            elif account.rating == rating_to_beat:
+                account.rank = counter - 1
+                account.save()
+            else:
+                account.rank = counter
+                account.save()
+                rating_to_beat = account.rating
+                counter += 1
             RankLog.objects.create(player=account, rating=account.rating, rank=account.rank)
-            
-            counter += 1
             
 
 

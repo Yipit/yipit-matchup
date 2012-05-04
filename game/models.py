@@ -24,11 +24,11 @@ class Game(models.Model):
 
     def save(self):
         from rank.engine import RankEngine
-
+        super(Game, self).save()
         engine = RankEngine(self)
         if engine.update_scores():
             self.ranked=True
-        super(Game, self).save()
+        
 
 class Account(models.Model):
     handle = models.CharField(unique=True, max_length=20)
