@@ -59,4 +59,4 @@ class Account(models.Model):
 
     @property
     def pretty_display(self):
-        return u"{}. {} ({} games played)".format(int(self.rating), self.handle, self.games_played)
+        return u"{}. {} {} ({} games)".format(self.rank, self.handle, int(self.rating),self.games_played)
