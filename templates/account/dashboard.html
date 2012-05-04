@@ -30,7 +30,7 @@
         <ul>
         {% for player in ranked_players %}
         {% if player.games_played != 0 %}
-          <li>{{player.rank}}. {{ player.handle }}: {{ player.rating }} ({{player.games_played}} games)</li>
+          <li>{{player.pretty_display}}</li>
         {% endif %}
         {% empty %}
         <li>No players ranked yet</li>
