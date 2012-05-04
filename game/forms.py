@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class GameForm(forms.Form):
 	player_1 = forms.ModelChoiceField(label="Player 1", queryset=Account.objects.all(), empty_label="Select Player 1")
 	player_2 = forms.ModelChoiceField(label="Player 2", queryset=Account.objects.all(), empty_label="Select Player 2")
-	score_1 = forms.IntegerField(label="Player 1's Score", max_value=99, min_value=0, widget=forms.TextInput(attrs={'style':'width:50px'}))
-	score_2 = forms.IntegerField(label="Player 2's score", max_value=99, min_value=0, widget=forms.TextInput(attrs={'style':'width:50px'}))
+	score_1 = forms.IntegerField(label="Player 1's Score", max_value=99, min_value=0, widget=forms.TextInput(attrs={'style':'width:50px', 'placeholder':'Score'}))
+	score_2 = forms.IntegerField(label="Player 2's score", max_value=99, min_value=0, widget=forms.TextInput(attrs={'style':'width:50px', 'placeholder':'Score'}))
 
 
 	def clean(self):

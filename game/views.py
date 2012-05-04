@@ -10,7 +10,6 @@ from django.views.generic.base import TemplateView
 from game.forms import GameForm
 from game.models import Game, Account
 
-
 class AddGameView(TemplateView):
     template_name = 'game/add_game.html'
     form_class = GameForm
@@ -48,7 +47,8 @@ class DashboardView(TemplateView):
 
 
     def get(self, request, *args, **kwargs):
-        self.games = Game.objects.all()
+
+        self.games = Game.objects.order_by('-date')
         all_accounts = Account.objects.all()
 
         rank_list = [(account, account.rank) for account in all_accounts]
@@ -60,7 +60,6 @@ class DashboardView(TemplateView):
         context = {}
         context['games'] = self.games
         context['ranked_players'] = self.ranked_players
-        context['accounts'] = Account.objects.all().exclude(user=request.user)
 
         return context
 
