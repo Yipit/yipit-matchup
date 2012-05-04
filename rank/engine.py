@@ -38,6 +38,7 @@ class RankEngine(object):
 
     def update_scores(self):
         self._compute_spread()
+        self.spread = math.fabs(self.spread)
 
         if self.spread < 13:
             index = 1
