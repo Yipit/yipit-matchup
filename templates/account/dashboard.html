@@ -5,7 +5,7 @@
 <div class="span6">
 <div class="well"><h2> Games Played <a style="float:right" href="{% url add_game %}" class="btn btn-success btn-large">Add Game</a></h2>
 </div>
-<div class="span7">
+<div class="span7" style="margin-left:0px">
 {% regroup games by date.date|date:"D M d" as games_by_day %}
 
 {% for day in games_by_day %}
