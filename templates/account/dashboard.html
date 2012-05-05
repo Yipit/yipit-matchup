@@ -1,9 +1,10 @@
-{% extends 'site_base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div class="row-fluid">
 <div class="span6">
-<div class="well"><h2> Games Played </h2></div>
+<div class="well"><h2> Games Played <a style="float:right" href="{% url add_game %}" class="btn btn-success btn-large">Add Game</a></h2>
+</div>
 <div class="span7">
 {% regroup games by date.date|date:"D M d" as games_by_day %}
 
