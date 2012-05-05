@@ -4,12 +4,11 @@
     <div class="row-fluid">
       <div class="span6">
         <div class="well"><h2> Games Played </h2></div>
-        <ul>
 
 {% regroup games by date.date|date:"D M d" as games_by_day %}
 
 {% for day in games_by_day %}
-<h4 style="margin-bottom:15px; margin-top:15px"> {{day.grouper}} </h4>
+<h4 "margin-bottom:15px; margin-top:15px"> {{day.grouper}} </h4>
       <table class="table">
         <thead>
           <tr>
@@ -29,11 +28,10 @@
         </tbody>
       </table>
 {% endfor %}
-</ul>
       </div>
 
       <div class="span6">
-        <div style="margin-bottom:53px" class="well"><h2> Ranking </h2></div>
+        <div style="margin-bottom:38px" class="well"><h2> Ranking </h2></div>
 
 
       <table class="table">
