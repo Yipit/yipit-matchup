@@ -8,7 +8,7 @@
 {% regroup games by date.date|date:"D M d" as games_by_day %}
 
 {% for day in games_by_day %}
-<h4 style="margin-left:5px;"> {{day.grouper}} </h4>
+<h4 style="margin-left:9px;"> {{day.grouper}} </h4>
 <table class="table">
 <thead>
 <tr>
