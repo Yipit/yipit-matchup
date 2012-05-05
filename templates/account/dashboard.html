@@ -7,35 +7,60 @@
         <ul>
 
 {% regroup games by date.date|date:"D M d" as games_by_day %}
-<ul>
 
 {% for day in games_by_day %}
 <h4 style="margin-bottom:15px; margin-top:15px"> {{day.grouper}} </h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Winner</th>
+            <th>Loser</th>
+            <th>Scores</th>
+          </tr>
 {% for game in day.list %}
-<li>{{ game.pretty_time }}: <b>{{ game.winner.handle }}</b> v. <b>{{ game.loser.handle }}</b>: {{ game.winning_score }} - {{ game.losing_score }} </li>
+        <tr>
+            <td>{{game.pretty_time}}</td>
+            <td>{{game.winner.handle}}</td>
+            <td>{{game.loser.handle}}</td>
+            <td>{{game.winning_score}} - {{game.losing_score}}</td>
+        </tr>
 {% endfor %}
+        </tbody>
+      </table>
 {% endfor %}
 </ul>
       </div>
-<!--      <div class="span4">
-        <div class="well"><h2> Most Wins </h2></div>
-        <ul>
-        {% for winner in winner_list %}
-          <li>{{ winner.handle }}: {{ winner.win_count }} wins</li>
-        {% endfor %} 
-      </ul>
-      </div> -->
+
       <div class="span6">
-        <div class="well"><h2> Ranking </h2></div>
-        <ul>
-        {% for player in ranked_players %}
-        {% if player.games_played != 0 %}
-          <li>{{player.pretty_display}}</li>
-        {% endif %}
-        {% empty %}
-        <li>No players ranked yet</li>
-        {% endfor %}
-        </ul>
+        <div style="margin-bottom:53px" class="well"><h2> Ranking </h2></div>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Points</th>
+            <th>Win-Loss Ratio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in ranked_players %}
+          {% if player.games_played != 0 %}
+          <tr>
+            <td>{{player.rank}}</td>
+            <td>{{player.handle}}</td>
+            <td>{{player.rating}}</td>
+            <td>{{player.win_loss_ratio}}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+
+        
+
         <div style="margin-top:15px"> <a href='http://www.usatt.org/ratings/ratingsprocess.html'>How does ranking work?</a></div>
       </div>
     </div>
