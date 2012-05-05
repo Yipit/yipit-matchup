@@ -62,5 +62,5 @@ class Account(models.Model):
         return self.win_count + self.loss_count
 
     @property
-    def pretty_display(self):
-        return u"{}. {} {} ({} games)".format(self.rank, self.handle, int(self.rating),self.games_played)
+    def pretty_rating(self):
+        return int(self.rating)
