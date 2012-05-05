@@ -3,20 +3,15 @@
 {% block content %}
 <div class="row-fluid">
 <div class="span6">
-<div class="well"><h2> Games Played <a style="float:right" href="{% url add_game %}" class="btn btn-success btn-large">Add Game</a></h2>
+<div style="margin-bottom:48px" class="well"><h2> Games Played <a style="float:right" href="{% url add_game %}" class="btn btn-success btn-large">Add Game</a></h2>
 </div>
 <div class="span7" style="margin-left:0px">
 {% regroup games by date.date|date:"D M d" as games_by_day %}
 
 {% for day in games_by_day %}
-<h4 style="margin-left:7.5px;"> {{day.grouper}} </h4>
+<h4 style="margin-bottom:6px;margin-left:7.5px;"> {{day.grouper}} </h4>
 <table class="table">
-<thead>
-<tr>
-<th>Time</th>
-<th>Players</th>
-<th>Scores</th>
-</tr>
+
 {% for game in day.list %}
 <tr>
 <td>{{game.pretty_time}}</td>
