@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -54,12 +56,15 @@ class DashboardView(TemplateView):
         rank_list = [(account, account.rank) for account in all_accounts]
         sorted_rank_list = sorted(rank_list, key=lambda x: x[1])
         self.ranked_players = list(map(lambda x: x[0], sorted_rank_list))
+        self.games_today = Game.objects.all().filter(date__gt=datetime.date.today()).count()
+        
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
     def compute_context(self, request, *args, **kwargs):
         context = {}
         context['games'] = self.games
         context['ranked_players'] = self.ranked_players
+        context['games_today'] = self.games_today
 
         return context
 
