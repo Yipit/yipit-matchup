@@ -1,51 +1,67 @@
-{% extends 'site_base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="well"><h2> Games Played </h2></div>
-        <ul>
 
+<div class="row-fluid">
+<div class="span6">
+<div style="margin-bottom:25px" class="well"><h2> Games Played <a style="float:right" href="{% url add_game %}" class="btn btn-success btn-large">Add Game</a></h2>
+</div>
+<div class="span7" style="margin-left:0px">
 {% regroup games by date.date|date:"D M d" as games_by_day %}
-<ul>
 
 {% for day in games_by_day %}
-<h4 style="margin-bottom:15px; margin-top:15px"> {{day.grouper}} ({{ games_today }} games played today)</h4>
+<h4 style="margin-bottom:6px;margin-left:7.5px;"> {{day.grouper}} ({{ day.list|length }} games played)</h4>
+<table class="table">
+
 {% for game in day.list %}
-<li>
+<tr>
 	{% if game.loser.rank < game.winner.rank %}
-		<span style="color:red">
-			{{ game.pretty_time }}: <b>{{ game.winner.handle }}</b> v. <b>{{ game.loser.handle }}</b>: {{ game.winning_score }} - {{ game.losing_score }}
-		</span> 
+		<td>{{ game.pretty_time }}</td>
+		<td>{{ game.winner.handle }} v. {{ game.loser.handle }}</td>
+		<td style="font-weight:bold;">{{ game.winning_score }} - {{ game.losing_score }}</td>
 	{% else %}
-		<span style="color:black">{{ game.pretty_time }}: <b>{{ game.winner.handle }}</b> v. <b>{{ game.loser.handle }}</b>: {{ game.winning_score }} - {{ game.losing_score }}
-		</span>
+		<td>{{ game.pretty_time }}</td>
+		<td>{{ game.winner.handle }} v. {{ game.loser.handle }}</td>
+		<td>{{ game.winning_score }} - {{ game.losing_score }}</td>
 	{% endif %} </li>
+</tr>
 {% endfor %}
+</tbody>
+</table>
 {% endfor %}
-</ul>
-      </div>
-<!--      <div class="span4">
-        <div class="well"><h2> Most Wins </h2></div>
-        <ul>
-        {% for winner in winner_list %}
-          <li>{{ winner.handle }}: {{ winner.win_count }} wins</li>
-        {% endfor %} 
-      </ul>
-      </div> -->
-      <div class="span6">
-        <div class="well"><h2> Ranking </h2></div>
-        <ul>
-        {% for player in ranked_players %}
-        {% if player.games_played != 0 %}
-          <li>{{player.rank}}. {{ player.handle }}: {{ player.rating }} ({{player.games_played}} games)</li>
-        {% endif %}
-        {% empty %}
-        <li>No players ranked yet</li>
-        {% endfor %}
-        </ul>
-        <div style="margin-top:15px"> <a href='http://www.usatt.org/ratings/ratingsprocess.html'>How does ranking work?</a></div>
-      </div>
-    </div>
+</div>
+</div>
+
+<div class="span6">
+<div style="margin-bottom:15px" class="well"><h2> Ranking <a style="float:right; font-size:70%" target="_blank" href='http://www.usatt.org/ratings/ratingsprocess.html'>How are players ranked?</a> </h2></div>
+
+<table class="table">
+<thead>
+<tr>
+<th>Rank</th>
+<th>Player</th>
+<th>Points</th>
+<th># Games</th>
+<th>Win Ratio</th>
+</tr>
+</thead>
+<tbody>
+{% for player in ranked_players %}
+{% if player.games_played != 0 %}
+<tr>
+<td>{{player.rank}}</td>
+<td>{{player.handle}}</td>
+<td>{{player.pretty_rating}}</td>
+<td>{{player.games_played}}</td>
+<td>{{player.win_loss_ratio}}</td>
+</tr>
+{% endif %}
+{% endfor %}
+</tbody>
+</table>
+
+
+</div>
+</div>
 
 {% endblock %}

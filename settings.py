@@ -10,6 +10,17 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ehlrhitkjv',                      # Or path to database file if using sqlite3.
+        'USER': 'ehlrhitkjv',                      # Not used with sqlite3.
+        'PASSWORD': 'vlxs_Ym87FxQHzenpAli',                  # Not used with sqlite3.
+        'HOST': 'ec2-23-23-217-196.compute-1.amazonaws.com',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -18,6 +29,17 @@ MANAGERS = ADMINS
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = 'America/Chicago'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ehlrhitkjv',                      # Or path to database file if using sqlite3.
+        'USER': 'ehlrhitkjv',                      # Not used with sqlite3.
+        'PASSWORD': 'vlxs_Ym87FxQHzenpAli',                  # Not used with sqlite3.
+        'HOST': 'ec2-23-23-217-196.compute-1.amazonaws.com',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html

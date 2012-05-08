@@ -46,6 +46,10 @@ class Account(models.Model):
         super(Account, self).save()
 
     @property
+    def win_loss_ratio(self):
+        return self.win_count / float(self.loss_count)
+
+    @property
     def win_count(self):
         return Game.objects.filter(winner=self).count()
 
@@ -56,3 +60,7 @@ class Account(models.Model):
     @property
     def games_played(self):
         return self.win_count + self.loss_count
+
+    @property
+    def pretty_rating(self):
+        return int(self.rating)
