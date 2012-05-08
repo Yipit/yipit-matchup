@@ -19,7 +19,8 @@ class AddGameView(TemplateView):
     alert_class = ""
 
     def get(self, request, *args, **kwargs):
-        self.form = self.form_class()
+        self.opponent = Account.objects.get(handle=request.GET.get('opponent'))
+        self.form = self.form_class({'player_2': self.opponent, 'score_1': 21})
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
     def post(self, request, *args, **kwargs):
