@@ -75,7 +75,8 @@ class DashboardView(TemplateView):
         start_date = datetime.datetime(year=first_date.year, month=first_date.month, day=first_date.day)
         window = datetime.timedelta(days=1)
         games_by_day = []
-        while start_date < datetime.datetime.now() + window:
+        now = datetime.datetime.now()
+        while start_date < datetime.datetime(year=now.year, month=now.month, day=now.day) + window:
             qs = Game.objects.filter(date__gte=start_date).filter(date__lt=start_date+window)
             games_by_day.append(qs.count())
             start_date += window
