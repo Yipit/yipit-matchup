@@ -47,7 +47,7 @@ class Account(models.Model):
 
     @property
     def win_loss_ratio(self):
-        return self.win_count / float(self.loss_count)
+        return "{} wins, {} losses".format(self.win_count, self.loss_count)
 
     @property
     def win_count(self):

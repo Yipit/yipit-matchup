@@ -36,8 +36,8 @@
 </div>
 
 <div class="span6">
-<div style="margin-bottom:15px" class="well"><h2> Ranking <a style="float:right; font-size:70%; color:green" target="_blank" href='http://www.usatt.org/ratings/ratingsprocess.html'>How are players ranked?</a> </h2></div>
-<div style="text-align:center; padding-bottom:5px;">Add a game faster! Just click your opponent's name below.</div>
+<div style="margin-bottom:15px" class="well"><h2> Ranking <a style="float:right; font-size:70%" target="_blank" href='http://www.usatt.org/ratings/ratingsprocess.html'>How are players ranked?</a> </h2></div>
+<div style="text-align:center; padding-bottom:5px;">Add a game faster! Just click the winner's name below.</div>
 <table class="table">
 <thead>
 <tr>
@@ -53,7 +53,7 @@
 {% if player.games_played != 0 %}
 <tr>
 <td>{{player.rank}}</td>
-<td><a href='{% url add_game %}?opponent={{player.handle}}'; style="color:green";>{{player.handle}}</td></a>
+<td><a href='{% url add_game %}?opponent={{player.handle}}'>{{player.handle}}</td></a>
 <td>{{player.pretty_rating}}</td>
 <td>{{player.games_played}}</td>
 <td>{{player.win_loss_ratio}}</td>
