@@ -19,9 +19,14 @@ class AddGameView(TemplateView):
     alert_class = ""
 
     def get(self, request, *args, **kwargs):
-        self.opponent = Account.objects.get(handle=request.GET.get('opponent'))
-        if self.opponent:
-            self.form = self.form_class({'player_1': self.opponent, 'score_1': 21})
+        opponent = request.GET.get('opponent')
+        if opponent:
+            try:
+                winner = Account.objects.get(handle=opponent)
+            except Account.DoesNotExist:
+                pass
+            else:
+                self.form = self.form_class({'player_1': winner, 'score_1': 21})
         else:
             self.form = self.form_class()
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
