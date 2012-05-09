@@ -69,11 +69,29 @@ class DashboardView(TemplateView):
         
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
+    def _group_games_by_day(self):
+        games = Game.objects.order_by('date')
+        first_date = games[0].date
+        start_date = datetime.datetime(year=first_date.year, month=first_date.month, day=first_date.day)
+        window = datetime.timedelta(days=1)
+        games_by_day = []
+        import ipdb; ipdb.set_trace()
+        while start_date <= datetime.datetime.now() + window:
+            qs = Game.objects.filter(date__gte=start_date).filter(date__lt=start_date+window)
+            games_by_day.append(qs.count())
+            start_date += window
+
+        self.first_date = first_date
+        return games_by_day
+
+
     def compute_context(self, request, *args, **kwargs):
         context = {}
         context['games'] = self.games
         context['ranked_players'] = self.ranked_players
         context['games_today'] = self.games_today
+        context['games_by_day'] = self._group_games_by_day()
+        context['start'] = self.first_date
 
         return context
 
