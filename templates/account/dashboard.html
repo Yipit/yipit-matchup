@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+{% block extra_head %}
+<style>
+.upset {
+    background:#E5FFE5
+}
+</style>
+{% endblock %}
+
 {% block content %}
 
 <div class="row-fluid">
@@ -7,7 +15,7 @@
 <div style="margin-bottom:15px" class="well"><h2> Games Played <a style="float:right" href="{% url add_game %}" class="btn btn-success btn-large">Add Game</a></h2>
 </div>
 
-<div class="span7" style="margin-left:0px">
+<div class="span8" style="margin-left:0px">
 {% regroup games by date.date|date:"D M d" as games_by_day %}
 
 <div style="color:green; padding-bottom: 15px">(Green scores when underdog wins!)</div>
@@ -17,16 +25,12 @@
 <table class="table">
 
 {% for game in day.list %}
-<tr>
-	{% if game.loser.rank < game.winner.rank %}
-		<td>{{ game.pretty_time }}</td>
-		<td>{{ game.winner.handle }} v. {{ game.loser.handle }}</td>
-		<td style="font-weight:bold; color:green;">{{ game.winning_score }} - {{ game.losing_score }}</td>
-	{% else %}
+<tr class="{% if game.loser.rank < game.winner.rank %}upset{% endif %}">
+	
 		<td>{{ game.pretty_time }}</td>
 		<td>{{ game.winner.handle }} v. {{ game.loser.handle }}</td>
 		<td>{{ game.winning_score }} - {{ game.losing_score }}</td>
-	{% endif %} </li>
+
 </tr>
 {% endfor %}
 </tbody>
