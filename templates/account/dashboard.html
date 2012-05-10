@@ -6,7 +6,14 @@
     background:#E5FFE5
 }
 </style>
-
+<script type="text/JavaScript">
+<!--
+function AutoRefresh(interval) {
+    setTimeout("location.reload(true);",interval);
+}
+//   -->
+</script>
+ 
 <script type="text/javascript">
 $(function () {
     var chart;
@@ -46,7 +53,7 @@ $(function () {
 });
         </script>
 {% endblock %}
-
+{% block body_onload %} JavaScript: AutoRefresh(480000){% endblock %}
 {% block content %}
 
 <div class="row-fluid">
@@ -56,7 +63,6 @@ $(function () {
 
 <div class="span8" style="margin-left:0px">
 {% regroup games by date.date|date:"D M d" as games_by_day %}
-<div id="container" class="span12" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 <div style="padding-bottom: 30px;"><span class="label label-warning">New</span> Green highlighting indicates an upset</div>
 
 {% for day in games_by_day %}
@@ -105,6 +111,7 @@ $(function () {
 {% endfor %}
 </tbody>
 </table>
+<div id="container" class="span12" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 </div>
 </div>
 

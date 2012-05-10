@@ -22,7 +22,7 @@
     {% block extra_head %} {% endblock %}
   </head>
 
-  <body>
+  <body onload="{% block body_onload %}{% endblock %}">
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
