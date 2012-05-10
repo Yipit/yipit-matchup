@@ -65,7 +65,6 @@ $(function () {
 
 {% for game in day.list %}
 <tr class="{% if game.loser.rank < game.winner.rank %}upset{% endif %}">
-	
 		<td>{{ game.pretty_time }}</td>
 		<td>{{ game.winner.handle }} v. {{ game.loser.handle }}</td>
 		<td>{{ game.winning_score }} - {{ game.losing_score }}</td>
@@ -94,7 +93,7 @@ $(function () {
 <tbody>
 {% for player in ranked_players %}
 {% if player.games_played != 0 %}
-<tr>
+<tr class="{% if player.on_fire %}alert{% endif %}"> 
 <td>{{player.rank}}</td>
 <td><a href='{% url add_game %}?opponent={{player.handle}}'>{{player.handle}}</td></a>
 <td>{{player.pretty_rating}}</td>

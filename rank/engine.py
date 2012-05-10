@@ -98,8 +98,8 @@ class RankEngine(object):
                 rating_to_beat = account.rating
                 counter += 1
             RankLog.objects.create(player=account, rating=account.rating, rank=account.rank)
-            
-
+        
+        
 
 
     # def compute_scores(self):

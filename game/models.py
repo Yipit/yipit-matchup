@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -64,3 +66,9 @@ class Account(models.Model):
     @property
     def pretty_rating(self):
         return int(self.rating)
+
+    @property
+    def on_fire(self):
+        games_won_today = Game.objects.filter(date__gt=datetime.date.today(), winner=self).count()
+        games_lost_today = Game.objects.filter(date__gt=datetime.date.today(), loser=self).count()
+        return games_won_today >= 3 and not games_lost_today
