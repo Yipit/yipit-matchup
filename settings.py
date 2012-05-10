@@ -124,6 +124,7 @@ INSTALLED_APPS = (
      'game',
      'signup',
      'rank',
+     'analytics',
      'gunicorn',
      'south'
 )

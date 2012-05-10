@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if message %}
+    <div class="alert {{alert_class}}"> {{message}} </div>
+    {% endif %}
+    <div>
+      <form action="." method="POST"> {% csrf_token %}
+      {{ form.player_1 }} {{ form.player_2 }}
+        <input type="submit" value="Analyze!" class="btn btn-success"/>
+      </form>
+    </div>
+
+    <div style="margin-bottom:45px">
+
+        {% if games %}
+        <h2> Games </h2>
+        <div class="row-fluid">
+        <div class="span8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Winner</th>
+                    <th>Loser</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for game in games %} 
+            <tr>
+                <td style="width:150px">{{game.date}}</td>
+                <td>{{game.winner}}</td>
+                <td>{{game.loser}}</td>
+                <td>{{game.winning_score}} - {{game.losing_score}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
