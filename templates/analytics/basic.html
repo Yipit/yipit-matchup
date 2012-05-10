@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h3>Instructions</h3>
+    <div style="margin-top:15px;margin-bottom:30px">
+    <p>This basic analysis will fetch the games of Player 1 and (if entered) Player 2,</br> i.e. Player_1 = Ben, Player_2 = Alice will return a history of games between Ben and Alice</p>
+    </div>
     {% if message %}
     <div class="alert {{alert_class}}"> {{message}} </div>
     {% endif %}
