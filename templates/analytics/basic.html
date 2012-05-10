@@ -7,14 +7,14 @@
     <div>
       <form action="." method="POST"> {% csrf_token %}
       {{ form.player_1 }} {{ form.player_2 }}
-        <input type="submit" value="Analyze!" class="btn btn-success"/>
+        <input style="margin-bottom:8px" type="submit" value="Analyze!" class="btn btn-success"/>
       </form>
     </div>
 
     <div style="margin-bottom:45px">
 
         {% if games %}
-        <h2> Games </h2>
+        <h2> Game History </h2>
         <div class="row-fluid">
         <div class="span8">
         <table class="table">
