@@ -29,7 +29,7 @@ function AutoRefresh(interval) {
     {% block extra_head %} {% endblock %}
   </head>
 
-  <body onload="{% block body_onload %}{% endblock %}">
+  <body style="{% block body_style %}{% endblock %}"onload="{% block body_onload %}{% endblock %}">
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% block body_style %}{% endblock %}
 {% block body_onload %}JavaScript: AutoRefresh(240000){% endblock %}
 
 {% block content %}
@@ -8,7 +9,7 @@
 
 {% for game in games %}
 
-        <div style="font-size:400%" class="well span12">
+        <div style="font-size:400%;background:rgb(206, 234, 245)" class="well span12">
             <span style="margin-right:30px">{{ game.pretty_time }}</span>
             <span style="margin-right:30px">{{ game.winner.handle }} v. {{ game.loser.handle }}</span>
             <span style="margin-right:30px">{{ game.winning_score }} - {{ game.losing_score }}</span>
