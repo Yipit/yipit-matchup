@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^analytics/$', AnalyticsView.as_view(), name='analytics'),
+    url(r'^games_today/$', 'game.views.games_today'),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

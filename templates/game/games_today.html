@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+<div class="span8">
+
+{% for game in games %}
+
+        <div style="font-size:400%" class="well span12">
+            <span style="margin-right:30px">{{ game.pretty_time }}</span>
+            <span style="margin-right:30px">{{ game.winner.handle }} v. {{ game.loser.handle }}</span>
+            <span style="margin-right:30px">{{ game.winning_score }} - {{ game.losing_score }}</span>
+        </div>
+
+{% endfor %}
+
+</div>
+</div>
+{% endblock %}

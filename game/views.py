@@ -52,6 +52,13 @@ class AddGameView(TemplateView):
         context['add_game'] = True
         return context
 
+def games_today(request):
+    template = 'game/games_today.html'
+    today = datetime.datetime.today()
+    context = {}
+    context['games'] = Game.objects.order_by('-date')
+    return render(request, template, context)
+
 
 class DashboardView(TemplateView):
     template_name = 'account/dashboard.html'
