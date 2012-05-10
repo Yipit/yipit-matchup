@@ -34,13 +34,13 @@
                 <td>{{game.loser}}</td>
                 <td>{{game.winning_score}} - {{game.losing_score}}</td>
             </tr>
+            {% empty %}
+            <strong> No games found - go play one!</strong>
             {% endfor %}
             </tbody>
         </table>
         </div>
         </div>
-        {% else %}
-        <strong> No games found - go play one!</strong>
         {% endif %}
     </div>
 {% endblock %}
