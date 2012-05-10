@@ -66,10 +66,7 @@ class DashboardView(TemplateView):
         sorted_rank_list = sorted(rank_list, key=lambda x: x[1])
         self.ranked_players = list(map(lambda x: x[0], sorted_rank_list))
         self.games_today = Game.objects.all().filter(date__gt=datetime.date.today()).count()
-        self.players_on_fire = []
-        for player in all_accounts:
-            if player.on_fire:
-                self.players_on_fire.append(player)
+        self.players_on_fire = [player for player in all_counts if player.on_fire]
         
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
