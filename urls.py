@@ -4,6 +4,7 @@ import settings
 from django.conf.urls.static import static
 from game.views import AddGameView, DashboardView
 from analytics.views import AnalyticsView
+from django.views.generic.simple import direct_to_template
 #from signup.views import LandingView
 
 admin.autodiscover()
@@ -14,15 +15,16 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', LandingView.as_view(), name='login'),
     # url(r'^logout/$', 'signup.views.logout', name='logout'),
-    url(r'^$', DashboardView.as_view(), name='dashboard'),
-    url(r'^add_game/$', AddGameView.as_view(), name='add_game'),
-    # url(r'^social/', include('social.foo.urls')),
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^analytics/$', AnalyticsView.as_view(), name='analytics'),
-    url(r'^games_today/$', 'game.views.games_today'),
-    # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', direct_to_template, {'template':'holiday.html'}),
+    # url(r'^$', DashboardView.as_view(), name='dashboard'),
+    # url(r'^add_game/$', AddGameView.as_view(), name='add_game'),
+    # # url(r'^social/', include('social.foo.urls')),
+    # # Uncomment the admin/doc line below to enable admin documentation:
+    # # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    # url(r'^analytics/$', AnalyticsView.as_view(), name='analytics'),
+    # url(r'^games_today/$', 'game.views.games_today'),
+    # # Uncomment the next line to enable the admin:
+    # url(r'^admin/', include(admin.site.urls)),
 )
 
 urlpatterns += patterns('',
