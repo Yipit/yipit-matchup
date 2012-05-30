@@ -65,8 +65,8 @@ class DashboardView(TemplateView):
 
 
     def get(self, request, *args, **kwargs):
-
-        self.games = Game.objects.order_by('-date')
+        three_days_ago = datetime.datetime.now() - datetime.timedelta(days=3)
+        self.games = Game.objects.filter(date__lt=three_days_ago).order_by('-date')
         all_accounts = Account.objects.all()
 
         rank_list = [(account, account.rank) for account in all_accounts]

@@ -48,7 +48,17 @@ $(function () {
 {% endblock %}
 {% block body_onload %} JavaScript: AutoRefresh(480000){% endblock %}
 {% block content %}
-
+<div class="row-fluid" style="margin-bottom:30px">
+    <div class="span3">
+        <div style="padding-top:100px">
+        <h2>Yipit the Fish</h2>
+        <p>October 2011 - May 2012</p>
+    </div>
+    </div>
+    <div class="span9">
+    <img src="/media/img/yipit_the_fish.jpg"/>
+</div>
+</div>
 <div class="row-fluid">
 <div class="span6">
 <div style="margin-bottom:15px" class="well"><h2> Games Played <a style="float:right" href="{% url add_game %}" class="btn btn-success btn-large">Add Game</a></h2>
