@@ -78,8 +78,7 @@ class DashboardView(TemplateView):
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
     def _group_games_by_day(self):
-        three_days_ago = datetime.datetime.now() - datetime.timedelta(days=3)
-        games = Game.objects.filter(date__gt=three_days_ago).order_by('date')
+        games = Game.objects.order_by('date')
         self.first_date = games[0].date
         start_date = datetime.datetime(year=self.first_date.year, month=self.first_date.month, day=self.first_date.day)
         window = datetime.timedelta(days=1)
