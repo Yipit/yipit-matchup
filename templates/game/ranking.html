@@ -24,5 +24,13 @@
 {% endfor %}
 </tbody>
 </table>
+<h1> Unranked Players </h1>
+<p>In order to be ranked, you need to have at least played 10 games. Check below to see how many games left until there is enough data to rank you!</p>
+<ul style="display-style:none">
+    {% for unranked in unranked_players %}
+    <li>{{unranked.0}} - you need {{unranked.1}} more games! </li>
+    {% endfor %}
+</ul>
+
 <div id="container" class="span12" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 </div>

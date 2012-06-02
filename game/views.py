@@ -93,7 +93,7 @@ class DashboardView(TemplateView):
         pass
 
     def get_active_players(self):
-        return [account for account in Account.objects.all() if account.user.is_active]
+        return [account for account in Account.objects.order_by('handle') if account.user.is_active]
 
     def get(self, request, *args, **kwargs):
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
@@ -103,4 +103,5 @@ class DashboardView(TemplateView):
         context['ranked_players'] = self.get_ranked_players()
         context['accounts'] = self.get_active_players()
         context['games'] = self.get_recent_games()
+        context['unranked_players'] = [(x.handle, 10-x.games_played) for x in Account.objects.filter(user__is_active=True, ranked=False)]
         return context
