@@ -38,6 +38,7 @@ class Account(models.Model):
     rank = models.PositiveIntegerField(blank=True, null=True)
     rank_updated = models.DateTimeField(blank=True, null=True)
     rating = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
+    ranked = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.handle

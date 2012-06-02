@@ -74,13 +74,20 @@ class RankEngine(object):
         self.winner.save()
         self.loser.save()
 
+        self._update_rankable()
         self._update_ranking()
 
         return True
 
+def _update_rankable(self):
+    for account in Account.objects.all():
+        if account.games_played > 10:
+            account.ranked = True
+            account.save()
+
 
     def _update_ranking(self):
-        rating_list = [(account, float(account.rating)) for account in Account.objects.all()]
+        rating_list = [(account, float(account.rating)) for account in Account.objects.filter(ranked=True)]
         account_list_sorted_by_rating = sorted(rating_list, key=lambda x: x[1], reverse=True)
         ordered_account_list = list(map(lambda x: x[0], account_list_sorted_by_rating))
 
