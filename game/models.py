@@ -71,4 +71,4 @@ class Account(models.Model):
     @property
     def on_fire(self):
         last_3_games = Game.objects.order_by('-date')[:3]
-        return len([game for game in last_5_games if game.winner==self]) == 3:
+        return len([game for game in last_5_games if game.winner==self]) == 3
