@@ -15,6 +15,13 @@ $(document).ready(function(){
 });
 </script>
 <style>
+
+input::-webkit-input-placeholder {
+    color: gray;
+}
+input:-moz-placeholder {
+    color: gray;
+}
  .nav-pills > .active > a{
     background-color:#43B320;
 }
@@ -62,12 +69,12 @@ $(document).ready(function(){
     <div class>
     <h2>Scores (Optional)</h2>
     <h3>Winning Score</h3>
-        <input id="winner_score" name="score_1" value="21" type="text"/>
+        <input id="winner_score" name="score_1" placeholder="21" value="" type="text"/>
     <input type="hidden" id="form_winner" name="player_1"/>
     </div>
     <div class>
     <h3>Losing Score</h3>
-    <input id="loser_score" name="score_2" type="text"/>
+    <input style="color:gray" id="loser_score" name="score_2" type="text"/>
     <input type="hidden" id="form_loser" name="player_2"/>
     </div>
     <div>

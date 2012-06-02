@@ -54,9 +54,12 @@ def process_game(request):
     if request.POST:
         winning_score = request.POST.get('score_1')
         losing_score = request.POST.get('score_2')
+        import ipdb; ipdb.set_trace()
         if not losing_score:
             losing_score = 0
             winning_score = 0
+        if losing_score and not winning_score:
+            winning_score = 21
         winner_id = request.POST.get('player_1')[1:]
         loser_id = request.POST.get('player_2')[1:]
         postdict = {u'score_1': unicode(winning_score), u'player_2': loser_id, u'score_2': unicode(losing_score), u'player_1': winner_id}
@@ -90,12 +93,15 @@ class DashboardView(TemplateView):
     def prepare_add_game_form(self):
         pass
 
+    def get_active_players(self):
+        return [account for account in self.accounts if account.user.is_active]
+
     def get(self, request, *args, **kwargs):
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
     def compute_context(self, request, *args, **kwargs):
         context = {}
         context['ranked_players'] = self.get_ranked_players()
-        context['accounts'] = self.accounts
+        context['accounts'] = self.get_active_players()
         context['games'] = self.get_recent_games()
         return context
