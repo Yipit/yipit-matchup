@@ -70,6 +70,5 @@ class Account(models.Model):
 
     @property
     def on_fire(self):
-        games_won_today = Game.objects.filter(date__gt=datetime.date.today(), winner=self).count()
-        games_lost_today = Game.objects.filter(date__gt=datetime.date.today(), loser=self).count()
-        return games_won_today >= 3 and not games_lost_today
+        last_3_games = Game.objects.order_by('-date')[:3]
+        return len([game for game in last_5_games if game.winner==self]) == 3:
