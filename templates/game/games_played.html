@@ -1,0 +1,23 @@
+<div class="span6">
+<div style="margin-bottom:15px" class="well"><h2> Games Played</h2></div>
+<div class="span8" style="margin-left:0px">
+{% regroup games by date.date|date:"D M d" as games_by_day %}
+<div style="padding-bottom: 30px;"><span class="label label-warning">New</span> Green highlighting indicates an upset</div>
+
+{% for day in games_by_day %}
+<h4> {{day.grouper}} ({{ day.list|length }} games played)</h4>
+<table class="table">
+
+{% for game in day.list %}
+<tr class="{% if game.loser.rank < game.winner.rank %}upset{% endif %}">
+        <td>{{ game.pretty_time }}</td>
+        <td>{{ game.winner.handle }} v. {{ game.loser.handle }}</td>
+        <td>{{ game.winning_score }} - {{ game.losing_score }}</td>
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endfor %}
+</div>
+</div>

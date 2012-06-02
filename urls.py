@@ -16,12 +16,8 @@ urlpatterns = patterns('',
     # url(r'^logout/$', 'signup.views.logout', name='logout'),
     url(r'^$', DashboardView.as_view(), name='dashboard'),
     url(r'^add_game/$', AddGameView.as_view(), name='add_game'),
-    # url(r'^social/', include('social.foo.urls')),
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^game_add/$', 'game.views.process_game', name='game_add'),
     url(r'^analytics/$', AnalyticsView.as_view(), name='analytics'),
-    url(r'^games_today/$', 'game.views.games_today'),
-    # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
 

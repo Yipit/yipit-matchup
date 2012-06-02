@@ -1,0 +1,80 @@
+<script>
+$(document).ready(function(){
+    $('.player1').click(function(){
+        $('.player1').removeClass('active');
+        $(this).addClass('active');
+        $('#form_winner').attr("value",($(this).attr('id')));
+    });
+    $('.player2').click(function(){
+        $('.player2').removeClass('loser');
+        $(this).addClass('loser');
+        $('#form_loser').attr("value",($(this).attr('id')));
+    });
+
+
+});
+</script>
+<style>
+ .nav-pills > .active > a{
+    background-color:#43B320;
+}
+
+.nav-pills > .active > a:hover{
+    background-color:#43B320;
+}
+
+.nav-pills > .loser > a{
+    color:white;
+    background-color:red;
+}
+
+.nav-pills > .loser > a:hover{
+    color:white;
+    background-color:red;
+}
+</style>
+
+
+<div class="row-fluid" style-"margin-bottom:30px">
+<div class='span3'>
+<div style="margin-bottom:30px; font-size:20px">
+    <h2>Winner</h2> 
+      <ul style="width: 150px" class="nav nav-pills nav-stacked">
+        {% for account in accounts %}
+        <li id="W{{account.id}}" class="player1"><a href="#">{{account.handle}}</a></li>
+        {% endfor %}
+      </ul>
+</div>
+</div>
+
+<div class='span3'>
+<div style="margin-bottom:30px; font-size:20px"> 
+    <h2>Loser</h2>
+      <ul style="width: 150px" class="nav nav-pills nav-stacked">
+        {% for account in accounts %}
+        <li id="L{{account.id}}" class="player2"><a class="loser" href="#">{{account.handle}}</a></li>
+        {% endfor %}
+      </ul>
+</div>
+</div>
+<div class="span3">
+<form action="{% url game_add %}" method="post"> {% csrf_token %}
+    <div class>
+    <h2>Scores (Optional)</h2>
+    <h3>Winning Score</h3>
+        <input id="winner_score" name="score_1" value="21" type="text"/>
+    <input type="hidden" id="form_winner" name="player_1"/>
+    </div>
+    <div class>
+    <h3>Losing Score</h3>
+    <input id="loser_score" name="score_2" type="text"/>
+    <input type="hidden" id="form_loser" name="player_2"/>
+    </div>
+    <div>
+        <input type="submit" class="btn btn-large btn-primary" value="Submit"/>
+    </div>
+</div>
+</form>
+
+
+</div>

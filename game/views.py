@@ -1,16 +1,13 @@
 import datetime
 
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout as auth_logout
 
 from django.views.generic.base import TemplateView
 
 from game.forms import GameForm
 from game.models import Game, Account
+
 
 class AddGameView(TemplateView):
     template_name = 'game/add_game.html'
@@ -52,56 +49,53 @@ class AddGameView(TemplateView):
         context['add_game'] = True
         return context
 
-def games_today(request):
-    template = 'game/games_today.html'
-    today = datetime.datetime.today()
-    context = {}
-    context['games'] = Game.objects.order_by('-date')
-    return render(request, template, context)
+
+def process_game(request):
+    if request.POST:
+        winning_score = request.POST.get('score_1')
+        losing_score = request.POST.get('score_2')
+        if not losing_score:
+            losing_score = 0
+            winning_score = 0
+        winner_id = request.POST.get('player_1')[1:]
+        loser_id = request.POST.get('player_2')[1:]
+        postdict = {u'score_1': unicode(winning_score), u'player_2': loser_id, u'score_2': unicode(losing_score), u'player_1': winner_id}
+        try:
+            form = GameForm(postdict)
+            if form.is_valid():
+                form.process()
+            else:
+                print "hello"
+        except:
+            return HttpResponseRedirect(reverse('dashboard'))
+        else:
+            return HttpResponseRedirect(reverse('dashboard'))
+    else:
+        return HttpResponseRedirect(reverse('dashboard'))
 
 
 class DashboardView(TemplateView):
     template_name = 'account/dashboard.html'
 
+    def get_recent_games(self):
+        three_days_ago = datetime.datetime.now() - datetime.timedelta(days=3)
+        return Game.objects.filter(date__gt=three_days_ago).order_by('-date')
+
+    def get_ranked_players(self):
+        self.accounts = Account.objects.order_by('handle')
+        rank_list = [(account, account.rank) for account in self.accounts]
+        sorted_rank_list = sorted(rank_list, key=lambda x: x[1])
+        return list(map(lambda x: x[0], sorted_rank_list))
+
+    def prepare_add_game_form(self):
+        pass
 
     def get(self, request, *args, **kwargs):
-        three_days_ago = datetime.datetime.now() - datetime.timedelta(days=3)
-        self.games = Game.objects.filter(date__gt=three_days_ago).order_by('-date')
-        all_accounts = Account.objects.all()
-
-        rank_list = [(account, account.rank) for account in all_accounts]
-        sorted_rank_list = sorted(rank_list, key=lambda x: x[1])
-        self.ranked_players = list(map(lambda x: x[0], sorted_rank_list))
-        self.games_today = Game.objects.all().filter(date__gt=datetime.date.today()).count()
-        self.players_on_fire = [player for player in all_accounts if player.on_fire]
-        
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
-
-    def _group_games_by_day(self):
-        games = Game.objects.order_by('date')
-        self.first_date = games[0].date
-        start_date = datetime.datetime(year=self.first_date.year, month=self.first_date.month, day=self.first_date.day)
-        window = datetime.timedelta(days=1)
-        games_by_day = []
-        now = datetime.datetime.now()
-
-        while start_date < datetime.datetime(year=now.year, month=now.month, day=now.day) + window:
-            qs = Game.objects.filter(date__gte=start_date).filter(date__lt=start_date+window)
-            games_by_day.append(qs.count())
-            start_date += window
-        return games_by_day
-
 
     def compute_context(self, request, *args, **kwargs):
         context = {}
-        context['games'] = self.games
-        context['ranked_players'] = self.ranked_players
-        context['games_today'] = self.games_today
-        context['games_by_day'] = self._group_games_by_day()
-        context['start'] = self.first_date
-        context['on_fire'] = self.players_on_fire
-
+        context['ranked_players'] = self.get_ranked_players()
+        context['accounts'] = self.accounts
+        context['games'] = self.get_recent_games()
         return context
-
-
-
