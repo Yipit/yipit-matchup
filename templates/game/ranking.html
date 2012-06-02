@@ -14,7 +14,6 @@
 </thead>
 <tbody>
 {% for player in ranked_players %}
-{% if player.games_played != 0 %}
 <tr class="{% if player.on_fire %}alert{% endif %}"> 
 <td>{{player.rank}}</td>
 <td>{{player.handle}}</td>
@@ -22,7 +21,6 @@
 <td>{{player.games_played}}</td>
 <td>{{player.win_loss_ratio}}</td>
 </tr>
-{% endif %}
 {% endfor %}
 </tbody>
 </table>

@@ -80,10 +80,10 @@ class RankEngine(object):
         return True
 
     def _update_rankable(self):
-    for account in Account.objects.all():
-        if account.games_played > 10:
-            account.ranked = True
-            account.save()
+        for account in Account.objects.all():
+            if account.games_played > 10:
+                account.ranked = True
+                account.save()
 
 
     def _update_ranking(self):

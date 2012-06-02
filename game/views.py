@@ -54,7 +54,6 @@ def process_game(request):
     if request.POST:
         winning_score = request.POST.get('score_1')
         losing_score = request.POST.get('score_2')
-        import ipdb; ipdb.set_trace()
         if not losing_score:
             losing_score = 0
             winning_score = 0
@@ -85,8 +84,8 @@ class DashboardView(TemplateView):
         return Game.objects.filter(date__gt=three_days_ago).order_by('-date')
 
     def get_ranked_players(self):
-        self.accounts = Account.objects.order_by('handle')
-        rank_list = [(account, account.rank) for account in self.accounts]
+        ranked_accounts = Account.objects.filter(ranked=True).order_by('handle')
+        rank_list = [(account, account.rank) for account in ranked_accounts]
         sorted_rank_list = sorted(rank_list, key=lambda x: x[1])
         return list(map(lambda x: x[0], sorted_rank_list))
 
@@ -94,7 +93,7 @@ class DashboardView(TemplateView):
         pass
 
     def get_active_players(self):
-        return [account for account in self.accounts if account.user.is_active]
+        return [account for account in Account.objects.all() if account.user.is_active]
 
     def get(self, request, *args, **kwargs):
         return self.render_to_response(self.compute_context(request, *args, **kwargs))
