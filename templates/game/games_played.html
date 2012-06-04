@@ -9,7 +9,7 @@
 <table class="table">
 
 {% for game in day.list %}
-<tr class="{% if game.loser.rank < game.winner.rank %}upset{% endif %}">
+<tr class="{% if game.upset %}upset{% endif %}">
         <td>{{ game.pretty_time }}</td>
         <td>{{ game.winner.handle }} v. {{ game.loser.handle }}</td>
         <td>{{ game.winning_score }} - {{ game.losing_score }}</td>

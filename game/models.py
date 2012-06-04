@@ -12,6 +12,7 @@ class Game(models.Model):
     winning_score = models.PositiveIntegerField()
     losing_score = models.PositiveIntegerField()
     ranked = models.BooleanField(default=False)
+    upset = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u"{} vs {} ({} to {})".format(self.loser, self.winner, self.losing_score, self.winning_score)
@@ -30,7 +31,7 @@ class Game(models.Model):
         engine = RankEngine(self)
         if engine.update_scores():
             self.ranked=True
-        
+
 
 class Account(models.Model):
     handle = models.CharField(unique=True, max_length=20)

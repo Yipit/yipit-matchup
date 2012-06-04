@@ -23,10 +23,16 @@ class GameForm(forms.Form):
         score_1 = self.cleaned_data['score_1']
         score_2 = self.cleaned_data['score_2']
 
+        if account_1.rank > account_2.rank:
+            upset = True
+        else:
+            upset = False
+
         new_game = Game(
             winner=account_1,
             loser=account_2,
             winning_score=score_1,
-            losing_score=score_2
+            losing_score=score_2,
+            upset=upset
         )
         new_game.save()
