@@ -14,6 +14,9 @@ class Game(models.Model):
     ranked = models.BooleanField(default=False)
     upset = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['-date']
+
     def __unicode__(self):
         return u"{} vs {} ({} to {})".format(self.loser, self.winner, self.losing_score, self.winning_score)
 
