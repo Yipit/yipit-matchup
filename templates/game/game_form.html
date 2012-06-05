@@ -65,7 +65,7 @@ input:-moz-placeholder {
 </div>
 </div>
 <div class="span3">
-<form action="{% url game_add %}" method="post"> {% csrf_token %}
+<form onsubmit="document.getElementById('submit_button').disabled = 1;" action="{% url game_add %}" method="post"> {% csrf_token %}
     <div class>
     <h2>Scores (Optional)</h2>
     <h3>Winning Score</h3>
@@ -78,7 +78,7 @@ input:-moz-placeholder {
     <input type="hidden" id="form_loser" name="player_2"/>
     </div>
     <div>
-        <input type="submit" class="btn btn-large btn-primary" value="Submit"/>
+        <input type="submit" id="submit_button" class="btn btn-large btn-primary" value="Submit"/>
     </div>
 </div>
 </form>
