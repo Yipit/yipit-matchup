@@ -7,7 +7,7 @@
     <div class="alert {{alert_class}}"> {{message}} </div>
     {% endif %}
     <div>
-      <form action="." method="POST"> {% csrf_token %}
+      <form action="." method="POST">
         <div style="margin-top:15px;margin-bottom:15px"><span style="margin-right:15px">{{ form.player_1 }}</span> {{form.score_1}}</div>
         <div style="margin-bottom:15px"><span style="margin-right:15px">{{ form.player_2 }}</span> {{form.score_2}}</div>
         <input type="submit" value="Add Game" class="btn btn-success"/>

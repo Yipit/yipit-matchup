@@ -4,7 +4,7 @@ import settings
 from django.conf.urls.static import static
 from game.views import AddGameView, DashboardView
 from analytics.views import AnalyticsView
-#from signup.views import LandingView
+from signup.views import LandingView
 
 admin.autodiscover()
 
@@ -12,8 +12,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', LandingView.as_view(), name='login'),
-    # url(r'^logout/$', 'signup.views.logout', name='logout'),
+    url(r'^login/$', LandingView.as_view(), name='login'),
+    url(r'^logout/$', 'signup.views.logout', name='logout'),
     url(r'^$', DashboardView.as_view(), name='dashboard'),
     url(r'^add_game/$', AddGameView.as_view(), name='add_game'),
     url(r'^game_add/$', 'game.views.process_game', name='game_add'),
