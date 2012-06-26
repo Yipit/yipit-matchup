@@ -67,7 +67,7 @@ class Command(BaseCommand):
             else:
                 if ratio > predator_info[1]:
                     predator_info = (account, ratio)
-                if (1 / ratio) > fearless_info:
+                if - ratio < fearless_info:
                     fearless_info = (account, ratio)
         return (predator_info, fearless_info)
 
