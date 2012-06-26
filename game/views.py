@@ -2,7 +2,7 @@ import datetime
 
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.template import RequestContext
+
 from django.views.generic.base import TemplateView
 
 from game.forms import GameForm
@@ -59,11 +59,8 @@ def process_game(request):
             winning_score = 0
         if losing_score and not winning_score:
             winning_score = 21
-        if request.user.is_authenticated():
-            winner_id = request.user.account.id
-        else:
-            winner_id = request.POST.get('player_1')
-        loser_id = request.POST.get('player_2')
+        winner_id = request.POST.get('player_1')[1:]
+        loser_id = request.POST.get('player_2')[1:]
         postdict = {u'score_1': unicode(winning_score), u'player_2': loser_id, u'score_2': unicode(losing_score), u'player_1': winner_id}
         try:
             form = GameForm(postdict)
@@ -92,17 +89,14 @@ class DashboardView(TemplateView):
         sorted_rank_list = sorted(rank_list, key=lambda x: x[1])
         return list(map(lambda x: x[0], sorted_rank_list))
 
+    def prepare_add_game_form(self):
+        pass
+
     def get_active_players(self):
         return [account for account in Account.objects.order_by('handle') if account.user.is_active]
 
     def get(self, request, *args, **kwargs):
-        self.context = self.compute_context(request, *args, **kwargs)
-        if request.user.is_authenticated():
-            self.add_personal_context()
-        return self.render_to_response(self.context)
-
-    def add_personal_context(self):
-        pass
+        return self.render_to_response(self.compute_context(request, *args, **kwargs))
 
     def compute_context(self, request, *args, **kwargs):
         context = {}

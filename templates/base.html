@@ -41,17 +41,6 @@ function AutoRefresh(interval) {
           </a>
           <a class="brand" href="{% url dashboard %}"><img style="height:20px"src="/media/img/ping-pong-icon.png"/>Yipit Matchup</a>
           {% block nav_bar_content %}
-            {% if not request.user.is_authenticated %}
-            <div>
-                <form class="navbar-form pull-right" method="POST" action="{% url login %}">
-                  <input type='text' name='username' placeholder='username'/> 
-                  <input type='password' name='password' placeholder='password'/>
-                  <input class='btn btn-success' type='submit' value='Login'/ >
-                </form>
-            </div>
-            {% else %}
-            <a style="float:right" href="{% url logout %}" class="btn btn-primary">Logout</a>
-            {% endif %}
           {% endblock %}
         </div>
       </div>

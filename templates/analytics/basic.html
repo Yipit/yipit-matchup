@@ -9,7 +9,7 @@
     <div class="alert {{alert_class}}"> {{message}} </div>
     {% endif %}
     <div>
-      <form action="." method="POST">
+      <form action="." method="POST"> {% csrf_token %}
       {{ form.player_1 }} {{ form.player_2 }}
         <input style="margin-bottom:8px" type="submit" value="Analyze!" class="btn btn-success"/>
       </form>

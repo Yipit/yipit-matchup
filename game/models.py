@@ -36,15 +36,6 @@ class Game(models.Model):
             self.ranked=True
 
 
-class Badge(models.Model):
-    name = models.CharField(max_length=200)
-    timestamp = models.DateTimeField(auto_now_add=True)
-    player = models.ForeignKey('game.Account')
-
-    def __unicode__(self):
-        return u"{} - {}".format(name, player)
-
-
 class Account(models.Model):
     handle = models.CharField(unique=True, max_length=20)
     user = models.OneToOneField('auth.User')

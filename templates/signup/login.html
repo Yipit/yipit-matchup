@@ -2,7 +2,7 @@
 
 {% block nav_bar_content %}
 <div>
-    <form class="navbar-form pull-right" method="POST" action=".">
+    <form class="navbar-form pull-right" method="POST" action="."> {% csrf_token %}
       <input type='text' name='username' placeholder='username'/> 
       <input type='password' name='password' placeholder='password'/>
       <input class='btn btn-success' type='submit' value='Login'/ >

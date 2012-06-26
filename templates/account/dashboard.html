@@ -9,15 +9,8 @@
 </style>
  {% endblock %}
 
-
 {% block content %}
-
-{% if request.user.is_authenticated %}
-{% include 'game/my_game_form.html' %}
-{% else %}
 {% include 'game/game_form.html' %}
-{% endif %}
-
     <div class="row-fluid">
         {% include 'game/games_played.html' %}
         {% include 'game/ranking.html' %}
